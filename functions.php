@@ -78,12 +78,14 @@ function challenge_array_maker ($parent) {
             }
 
 function get_assignment_category_number($post_id){
-  $cats = get_the_category($post_id);
+  $cats = get_the_category($post_id);  
   $name = $cats[0]->name;
   $findme   = '.';
   $pos = strpos($name, $findme);
   $number = intval(substr($name,0,$pos));
+  if ($number){
   return $number;
+}
 }
 
 function get_post_background_img ($post) {
@@ -93,14 +95,36 @@ function get_post_background_img ($post) {
     }
 }            
 
-
+/*
 add_action( 'save_post', 'add_assignment_id_metafield' );
 
 function add_assignment_id_metafield($post_id) {
            global $post;
-         $post_id = $post->ID;
-          $assignment_num = get_assignment_category_number($post);
+          $post_id = $post->ID;
+          $assignment_num = intval(get_assignment_category_number($post));
         // Check if the custom field has a value.
             update_post_meta($post_id,'anth_assignment_num', $assignment_num);    
          }
+         */
+
+// hook the translation filters
+add_filter(  'gettext',  'change_group_to_tribe'  );
+add_filter(  'ngettext',  'change_group_to_tribe'  );
+
+function change_group_to_tribe( $translated ) {
+  $translated = str_ireplace(  'Group',  'Tribe',  $translated );  // ireplace is PHP5 only
+  return $translated;
+}  
+
+
+add_filter(  'gettext',  'change_groups_to_tribes'  );
+add_filter(  'ngettext',  'change_groups_to_tribes'  );
+
+function change_groups_to_tribes( $translated ) {
+  $translated = str_ireplace(  'Groups',  'Tribes',  $translated );  // ireplace is PHP5 only
+  return $translated;
+} 
+
+
+
 ?>

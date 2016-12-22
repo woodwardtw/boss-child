@@ -14,10 +14,10 @@ You're the boss, so have fun editing!
 ----------------------------------------------------------------
 1.0 - Global Styles
 2.0 - Responsive media queries (mobile styles)
-	2.1 - MAXIMUM width of 720 pixels (phones landscape)
-	2.2 - MAXIMUM width of 350 pixels (phones portrait)
-	2.3 - MINIMUM width of 721 pixels (tablets+)
-	2.4 - MINIMUM width of 1040 pixels (desktops and laptops)
+  2.1 - MAXIMUM width of 720 pixels (phones landscape)
+  2.2 - MAXIMUM width of 350 pixels (phones portrait)
+  2.3 - MINIMUM width of 721 pixels (tablets+)
+  2.4 - MINIMUM width of 1040 pixels (desktops and laptops)
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
 1.0 - Global Styles
@@ -25,7 +25,7 @@ You're the boss, so have fun editing!
 
 
 
-.square {
+#challenge-block .square {
   float: left;
   position: relative;
   width: 16%;
@@ -36,13 +36,13 @@ You're the boss, so have fun editing!
   background-size: cover; 
    -webkit-transition: background-color 2s;
   transition: background-color 2s;
-	}
-
-  .square:hover {
-  	background-color: #000;
   }
 
-.content {
+  #challenge-block .square:hover {
+    background-color: #000;
+  }
+
+#challenge-block .content {
   position: absolute;
   height: 90%;
   /* = 100% - 2*5% padding */
@@ -50,17 +50,17 @@ You're the boss, so have fun editing!
   /* = 100% - 2*5% padding */
   padding: 5%; }
 
-.table {
+#challenge-block .table {
   display: table;
   width: 100%;
   height: 100%; }
 
-.table-cell {
+#challenge-block .table-cell {
   display: table-cell;
   vertical-align: middle;
   text-align: center; }
 
-.assignment_no {
+#challenge-block .assignment_no {
   font-size: 8vw;
   color: #fff; 
   display: inline;
@@ -68,16 +68,32 @@ You're the boss, so have fun editing!
   transition: color 2s;
 }
 
-.assignment_no:hover {
+#challenge-block .assignment_no:hover {
    color: #65AA55;
 }
 
 #challenge-block {
-	display: inline-block;
-	width: 100%;
+  display: inline-block;
+  width: 100%;
 }  
 
 
+
+.panel-grid:first-child {
+    margin-top:0px;
+    padding-top:0px;
+}
+
+body.page-template-front-page.page:not(.buddypress) .site-content article:not(.comment) {
+ padding-top: 0;   
+}
+
+.home article {
+ padding-top: 0 !important;
+ padding-bottom: 0 !important;
+}
+
+.whitespace{height:0px;}
 
 /*--------------------------------------------------------------
 2.0 - Responsive media queries (mobile styles)
@@ -88,11 +104,9 @@ You're the boss, so have fun editing!
 @media screen and (max-width: 720px) {
 
 
-	/*
-	.just_an_example {
-		color: black;
-	}
-	*/
+  .sap-post-container {
+    display: inline-block;
+  }
 
 
 }/* don't delete this closing bracket */
@@ -107,11 +121,11 @@ You're the boss, so have fun editing!
 @media screen and (max-width: 350px) {
 
 
-	/*
-	.just_an_example {
-		color: black;
-	}
-	*/
+  /*
+  .just_an_example {
+    color: black;
+  }
+  */
 
 
 }/* don't delete this closing bracket */
@@ -126,11 +140,11 @@ You're the boss, so have fun editing!
 @media screen and (min-width: 721px)  {
 
 
-	/*
-	.just_an_example {
-		color: black;
-	}
-	*/
+  /*
+  .just_an_example {
+    color: black;
+  }
+  */
 
 
 }/* don't delete this closing bracket */
@@ -144,12 +158,10 @@ You're the boss, so have fun editing!
 --------------------------------------------------------------*/
 @media screen and (min-width: 1040px)  {
 
-
-	/*
-	.just_an_example {
-		color: black;
-	}
-	*/
+.type-post {
+    width: 720px;
+    margin: 0 auto;
+}
 
 
 }/* don't delete this closing bracket */
