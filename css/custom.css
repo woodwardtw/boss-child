@@ -22,7 +22,15 @@ You're the boss, so have fun editing!
 /*--------------------------------------------------------------
 1.0 - Global Styles
 --------------------------------------------------------------*/
-
+ @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+.entry-content, .entry-content p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 26px;
+}
 
 
 #challenge-block .square {
@@ -38,7 +46,7 @@ You're the boss, so have fun editing!
   transition: background-color 2s;
   }
 
-  #challenge-block .square:hover {
+#challenge-block .square:hover {
     background-color: #000;
   }
 
@@ -79,6 +87,8 @@ You're the boss, so have fun editing!
 
 
 
+/*first page spacing stuff*/
+
 .panel-grid:first-child {
     margin-top:0px;
     padding-top:0px;
@@ -93,7 +103,92 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
  padding-bottom: 0 !important;
 }
 
-.whitespace{height:0px;}
+.whitespace{
+  height:0px;
+}
+
+
+/*drop headers on regular pages*/
+/*customize single pages*/
+.anth-kill {
+  display: none !important;
+}
+
+.anth .cover-content { 
+  background-color: #424242;
+}
+
+
+.anth .entry-title {
+  display: none;
+}
+
+.anth .entry-meta {
+  background-color: rgba(255,255,255,0.3);
+  padding: 6px;
+  margin-top: 0;
+  box-shadow: none;
+}
+
+.anth .post-title {
+  padding: 6px;
+  background-color: rgba(255,255,255,0.3);
+  margin-bottom: 0;
+  width: 100%;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+/*FULL Function ARCHIVE-ISH page*/
+
+.flex-container {
+      display: flex; /* I now declare this as a flex-container */
+      display: -webkit-flex; /* This is the Chrome notation */  
+      min-height: 300px;
+      flex-flow: row wrap;
+    }
+
+  .flex-item {
+      padding: 5px;
+      width: 300px;
+      margin-top: 10px;
+      color: white;
+      font-weight: bold;
+      font-size: 3em;
+      text-align: center;      
+    }  
+
+  .flex-item h2 {
+    color: #fff;
+    display: inline-block;
+    margin-top: 60%;
+    margin-left: 4px;
+    font-weight: 200;
+    background-color: rgba(0,0,0,.3);
+    width: 93%;
+  }  
+
+   .flex-item article {
+    padding: 0 !important;
+   } 
+
+
+
+   .anth-fav {
+    font-size: 12px;
+   }
+
+   .anth-author {
+    color: #424242;
+    font-size: .5em;
+   }
+
+   .anth-thumb {
+    height: 300px;
+    width: 300px;
+   }
+
+
 
 /*--------------------------------------------------------------
 2.0 - Responsive media queries (mobile styles)
@@ -109,6 +204,21 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
   }
 
 
+.anth .post-title {
+  margin-top: 5%;
+  margin-left: 3%;
+}
+
+.anth .entry-meta {
+  margin-left: 3%;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.flex-item {
+      width: 50%;
+    }    
+
 }/* don't delete this closing bracket */
 
 
@@ -121,11 +231,10 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
 @media screen and (max-width: 350px) {
 
 
-  /*
-  .just_an_example {
-    color: black;
-  }
-  */
+
+ .flex-item {
+      width: 100%;
+    }    
 
 
 }/* don't delete this closing bracket */
@@ -140,11 +249,6 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
 @media screen and (min-width: 721px)  {
 
 
-  /*
-  .just_an_example {
-    color: black;
-  }
-  */
 
 
 }/* don't delete this closing bracket */
@@ -163,5 +267,37 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
     margin: 0 auto;
 }
 
+
+/*customize single pages*/
+.anth-kill {
+  display: none !important;
+}
+
+.anth .cover-content {
+  width: 720px;
+  height: 720px;
+  margin: 0 auto;
+}
+
+.anth .post-title {
+  margin-top: 65%;
+  margin-left: 3%;  
+}
+
+.anth .entry-meta {
+  margin-left: 3%;
+  display: block;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  display: block;
+}
+
+.anth .entry-content {
+  padding-top: 40px;  
+}
+
+.anth .site-content {
+  padding: 40px 70px 26px;
+}
 
 }/* don't delete this closing bracket */

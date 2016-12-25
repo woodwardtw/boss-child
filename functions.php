@@ -112,7 +112,7 @@ add_filter(  'gettext',  'change_group_to_tribe'  );
 add_filter(  'ngettext',  'change_group_to_tribe'  );
 
 function change_group_to_tribe( $translated ) {
-  $translated = str_ireplace(  'Group',  'Tribe',  $translated );  // ireplace is PHP5 only
+  $translated = str_ireplace(  'Group',  'Clan',  $translated );  // ireplace is PHP5 only
   return $translated;
 }  
 
@@ -121,10 +121,42 @@ add_filter(  'gettext',  'change_groups_to_tribes'  );
 add_filter(  'ngettext',  'change_groups_to_tribes'  );
 
 function change_groups_to_tribes( $translated ) {
-  $translated = str_ireplace(  'Groups',  'Tribes',  $translated );  // ireplace is PHP5 only
+  $translated = str_ireplace(  'Groups',  'Clans',  $translated );  // ireplace is PHP5 only
   return $translated;
 } 
 
+//INFINITE SCROLLING
+
+//revisit bill erickson's post . . . 
+
+
+//special ANTH pages
+
+function anth_cat_search_add_meta_box() {
+ 
+  $screens = array('post');
+  foreach ( $screens as $screen ) {
+ 
+    add_meta_box(
+    'anth_cat_search_category',
+    __( 'Choose the Category', 'anthsearch' ),
+    'anth_cat_search_category_callback',
+    $screen,
+      'normal',
+      'high'
+     );
+    }
+}
+
+function anth_thumb_background(){
+    global $post; 
+    $src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array( 5600,1000 ), false, '' )[0];
+    if ($src){ 
+    return 'style="background-image: url(' . $src .'); background-size: cover;"';
+  } else {
+    return 'style="background-color:#efefef"';
+  }
+  }
 
 
 ?>

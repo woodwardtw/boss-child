@@ -82,31 +82,46 @@ get_header(); ?>
 
             </div><!-- #main -->
         </div><!-- #primary -->
-        <?php if ( is_active_sidebar('sensei-default') || is_active_sidebar('learndash-default') ) : ?>
-            <!-- default WordPress sidebar -->
-            <div id="secondary" class="widget-area" role="complementary">
-                <?php 
-                    if ( is_active_sidebar('sensei-default') ){
-                        dynamic_sidebar( 'sensei-default' ); 
-                    } else {
-                        dynamic_sidebar( 'learndash-default' ); 
-                    }
-                ?>
-            </div><!-- #secondary -->
-        <?php endif; ?>
-    </div>
-<?php else: ?>
-    <?php while ( have_posts() ) : the_post(); ?>
+                <?php if ( is_active_sidebar('sensei-default') || is_active_sidebar('learndash-default') ) : ?>
+                    <!-- default WordPress sidebar -->
+                    <div id="secondary" class="widget-area" role="complementary">
+                        <?php 
+                            if ( is_active_sidebar('sensei-default') ){
+                                dynamic_sidebar( 'sensei-default' ); 
+                            } else {
+                                dynamic_sidebar( 'learndash-default' ); 
+                            }
+                        ?>
+                    </div><!-- #secondary -->
+                <?php endif; ?>
+            </div>
+        <?php else: ?>
+            <?php while ( have_posts() ) : the_post(); ?>
 
-        <?php
-        $style = ( has_post_thumbnail() && boss_get_option( 'boss_cover_blog' ) ) ? 'style="background-image: url(' . get_the_post_thumbnail_url( $post ) . '); background-position: center;background-size: cover;background-repeat: none;" data-photo="yes"' : '';
+                <?php
+                $style = ( has_post_thumbnail() && boss_get_option( 'boss_cover_blog' ) ) ? 'style="background-image: url(' . get_the_post_thumbnail_url( $post ) . '); background-position: center;background-size: cover;background-repeat: none;" data-photo="yes"' : '';
+                ?>
+
+                <header class="page-cover table" >
+                    <div class="table-cell page-header anth-kill">
+                        <!-- excised content -->
+                    </div>
+                </header><!-- .archive-header -->
+
+                <?php
+                if ( is_active_sidebar( 'sidebar' ) ) :
+                    echo '<div class="page-right-sidebar">';
+                else :
+                    echo '<div class="page-full-width">';
+                endif;
         ?>
 
-        <header class="page-cover table" <?php echo $style; ?>>
-            <div class="table-cell page-header">
-                <div class="cover-content">
-                    <h1 class="post-title main-title"><?php the_title(); ?></h1>
+        <div id="primary" class="site-content">
+
+            <div id="content" role="main" class="anth">
+               <div class="cover-content"<?php echo $style;?>>                    
                     <div class="table">
+                        <h1 class="post-title main-title"><?php the_title(); ?></h1>
                         <div class="table-cell entry-meta">
                             <?php buddyboss_entry_meta(); ?>
                         </div>
@@ -166,19 +181,6 @@ get_header(); ?>
                         </div>
                     </div>
                 </div>
-            </div>
-        </header><!-- .archive-header -->
-
-        <?php
-        if ( is_active_sidebar( 'sidebar' ) ) :
-            echo '<div class="page-right-sidebar">';
-        else :
-            echo '<div class="page-full-width">';
-        endif;
-        ?>
-
-        <div id="primary" class="site-content">
-            <div id="content" role="main">
 
                 <?php get_template_part( 'content', get_post_format() ); ?>
 
