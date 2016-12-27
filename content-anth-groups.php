@@ -1,6 +1,6 @@
 <?php
 /**
- * The template used for anth101 loops
+ * The template used for anth101 GROUP loops
  *
  * @package WordPress
  * @subpackage Boss
@@ -19,13 +19,30 @@
 			<!--NEW LOOP -->
 			<?php
 			  // set up or arguments for our custom query
- 			  $the_category = get_post_custom_values('anth_cat_search')[0];
+
+			//get buddypress group stuff
+			$id = $_GET['id'];
+
+			global $bp;
+			$group_id = $id;
+			$group = groups_get_group( $group_id );
+			$groupName = $group->name;
+			echo $groupName;
+
+			$bpquery = new BP_Group_Member_Query(array(
+            'group_id'   => $group_id,            
+		        ));
+
+			 $buddypressGroupMembers = $bpquery->user_ids; 
+			//get buddypress members
+			
+
 
 			  $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 			  $query_args = array(
 			    'post_type' => 'post',
-			    'category_name' => $the_category,
 			    'posts_per_page' => 12,
+			    'author__in' => $buddypressGroupMembers,
 			    'paged' => $paged
 			  );
 			  // create a new instance of WP_Query

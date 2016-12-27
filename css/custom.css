@@ -124,7 +124,7 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
 }
 
 .anth .entry-meta {
-  background-color: rgba(255,255,255,0.3);
+  background-color: rgba(0,0,0,0.3);
   padding: 6px;
   margin-top: 0;
   box-shadow: none;
@@ -132,36 +132,36 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
 
 .anth .post-title {
   padding: 6px;
-  background-color: rgba(255,255,255,0.3);
+  background-color: rgba(0,0,0,0.3);
   margin-bottom: 0;
-  width: 100%;
+  width: 98%;
   border-bottom: none;
   box-shadow: none;
 }
+
 
 /*FULL Function ARCHIVE-ISH page*/
 
 .flex-container {
       display: flex; /* I now declare this as a flex-container */
       display: -webkit-flex; /* This is the Chrome notation */  
-      min-height: 300px;
+      min-height: 260px;
       flex-flow: row wrap;
     }
 
   .flex-item {
-      padding: 5px;
-      width: 300px;
+      padding: 2px;
       margin-top: 10px;
       color: white;
       font-weight: bold;
       font-size: 3em;
-      text-align: center;      
+      text-align: center;
     }  
 
   .flex-item h2 {
     color: #fff;
     display: inline-block;
-    margin-top: 60%;
+    margin-top: 70%;
     margin-left: 4px;
     font-weight: 200;
     background-color: rgba(0,0,0,.3);
@@ -173,22 +173,46 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
    } 
 
 
-
    .anth-fav {
     font-size: 12px;
+    text-align: left;
    }
 
    .anth-author {
     color: #424242;
-    font-size: .5em;
+    font-size: 17px;
+    text-align: left;    
    }
 
+   
    .anth-thumb {
-    height: 300px;
-    width: 300px;
+    height: 400px;
+    width: 400px;
+    background-repeat: no-repeat;  
+    background-size: cover;
+    background-repeat: no-repeat;   
+    background-position: center;  
    }
 
+   .anth-prev-next-posts {
+    width: auto;
+    margin: 0 auto;
+    text-align: center;
+   }
 
+   .anth-posts-link {
+    padding: 3px 7px;
+    margin: 10px;
+    border: 1px solid #efefef;
+   }
+
+   .anth-posts-link:hover {
+    background-color: #efefef;
+   }
+
+   .entry-meta .author.vcard a,  .entry-meta .author.vcard a:hover, .entry-meta .post-date, .entry-meta .post-date:hover, .entry-meta .comments-link, .leave-reply{
+    color: #fff;
+   }
 
 /*--------------------------------------------------------------
 2.0 - Responsive media queries (mobile styles)
@@ -199,25 +223,44 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
 @media screen and (max-width: 720px) {
 
 
-  .sap-post-container {
+.sap-post-container {
     display: inline-block;
+    margin-left:0;
   }
 
 
-.anth .post-title {
-  margin-top: 5%;
-  margin-left: 3%;
-}
-
 .anth .entry-meta {
-  margin-left: 3%;
   display: block;
   margin-bottom: 20px;
+  background-color: rgba(0,0,0,0.3);
 }
 
-.flex-item {
-      width: 50%;
-    }    
+
+.anth-thumb {   
+    margin-left: -35px;
+    margin-right: -10px;
+     background-repeat: no-repeat;  
+    background-size: cover;
+    background-repeat: no-repeat;  
+    background-position: center;   
+   }    
+
+.anth-excerpt {
+    padding: 10px 20px 5px 0;
+    max-height: 140px;
+    overflow: hidden;
+  }   
+
+.anth .post-title {
+  margin-left: 0px;
+  font-size: 3.2vh;  
+}
+
+.cover-content {
+    padding-top: 50%;
+    padding-right: 25%;
+    margin: 0 auto;
+  }
 
 }/* don't delete this closing bracket */
 
@@ -231,11 +274,31 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
 @media screen and (max-width: 350px) {
 
 
+  .flex-container {
+    width: 100%;
+  }
 
  .flex-item {
-      width: 100%;
-    }    
+      height: 400px;
+      width: 400px;
+      padding: 2px 15px;
+      margin-left: -20px;
+    }   
 
+  .anth-excerpt {
+    max-height: 140px;
+    overflow: hidden;
+  }
+
+  body.single-post h1.main-title {
+    padding-left: 20px;
+  }
+
+  .cover-content {
+    width:360px;
+    height: 360px;
+    margin: 0 auto;
+  }
 
 }/* don't delete this closing bracket */
 
@@ -280,16 +343,17 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
 }
 
 .anth .post-title {
-  margin-top: 65%;
-  margin-left: 3%;  
+  margin-top: 75%;
+  margin-left: 1px;
+  font-size: 2.2vw;  
 }
 
 .anth .entry-meta {
-  margin-left: 3%;
   display: block;
   margin-bottom: 20px;
   padding-bottom: 10px;
   display: block;
+  background-color: rgba(0,0,0,0.3);
 }
 
 .anth .entry-content {
@@ -299,5 +363,27 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
 .anth .site-content {
   padding: 40px 70px 26px;
 }
+
+.flex-container {
+    margin-left: -40px;
+}
+
+.flex-item {
+      width: 260px;          
+    }  
+
+.anth-thumb {
+    height: 260px;
+    width: 260px;
+     background-repeat: no-repeat;  
+    background-size: cover;
+    background-repeat: no-repeat;    
+    background-position: center; 
+   }
+ .anth-excerpt {
+    max-height: 140px;
+    overflow: hidden;
+  }
+ }  
 
 }/* don't delete this closing bracket */

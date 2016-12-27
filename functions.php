@@ -150,13 +150,38 @@ function anth_cat_search_add_meta_box() {
 
 function anth_thumb_background(){
     global $post; 
-    $src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array( 5600,1000 ), false, '' )[0];
-    if ($src){ 
-    return 'style="background-image: url(' . $src .'); background-size: cover;"';
-  } else {
-    return 'style="background-color:#efefef"';
-  }
-  }
 
+    $image_id=get_post_thumbnail_id($post);
+    $image_url = wp_get_attachment_image_src($image_id,'thumbnail');
+    $image_url=$image_url[0];
+
+    //$src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID, 'medium'), array( 5600,1000 ), false, '' )[0];
+    if ($image_url){ 
+       return 'style="background-image: url(' . $image_url .'); background-size: cover;"';
+    } else {
+    return 'style="background-color:#efefef"';
+    }
+  }
+function ra_add_author_filter() {
+          add_filter( 'author_link', 'ra_bp_filter_author' );
+  }       
+  add_action( 'wp_head', 'ra_add_author_filter' );
+  
+  function ra_bp_filter_author( $content ) {
+          if( defined( 'BP_MEMBERS_SLUG' ) ) {
+                  if( is_multisite() ) {
+                          $member_url = network_home_url( BP_MEMBERS_SLUG );
+                          if( !is_subdomain_install() && is_main_site() )
+                                  $extra = '/blog';
+                          else
+                                  $extra = '';
+  
+                          $blog_url = get_option( 'siteurl' ) . $extra . '/author';
+                          return str_replace( $blog_url, $member_url, $content );
+                  }
+                  return preg_replace( '|/author(/[^/]+)/?$|', '/' . BP_MEMBERS_SLUG . '$1' . '/profile/', $content );
+          }
+          return $content;
+  }
 
 ?>
