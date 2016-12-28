@@ -1,107 +1,103 @@
-<?php if ( bp_group_has_members( bp_ajax_querystring( 'group_members' ) ) ) : ?>
+<?php
+/**
+ * The template used for anth101 GROUP loops
+ *
+ * @package WordPress
+ * @subpackage Boss
+ * @since Boss 1.0.0
+ */
+?>
 
-	<?php do_action( 'bp_before_group_members_content' ); ?>
+	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		
+		<header class="entry-header <?php if(is_search()){ echo 'page-header'; }?>">
+			<h1 class="entry-title <?php if(is_search()){ echo 'main-title'; }?>"><?php the_title(); ?></h1>
+		</header>
+
+		<div class="entry-content">
+			<?php the_content(); ?>
+			<!--NEW LOOP -->
+			<?php
+			  // set up or arguments for our custom query
+
+			//get buddypress group stuff
+			
+			$group_id = bp_get_group_id();
+
+			
+			$bpquery = new BP_Group_Member_Query(array(
+            'group_id'   => $group_id,  
+		        ));
+
+			 $buddypressGroupMembers = $bpquery->user_ids; 
+
+			//get buddypress members
+			
 
 
-	<?php
-	//only add markup if do action have output.
-	$action_out = null;
-	ob_start();
-	do_action( 'bp_members_directory_member_sub_types' );
-	$action_out = ob_get_contents(); //capture the do action content into var.
-	ob_end_clean();
-	if(!empty($action_out)):
-	?>
-	<div class="item-list-tabs" id="subnav" role="navigation">
-		<ul>
-			<?php echo $action_out; ?>
-		</ul>
-	</div>
-	<?php endif; ?>
+			  $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+			  $query_args = array(
+			    'post_type' => 'post',
+			    'posts_per_page' => 12,
+			    'author__in' => $buddypressGroupMembers,
+			    'paged' => $paged
+			  );
+			  // create a new instance of WP_Query
+			  $the_query = new WP_Query( $query_args );
+			?>
 
-	<div id="pag-top" class="pagination no-ajax">
-
-		<div class="pag-count" id="member-count-top">
-
-			<?php bp_members_pagination_count(); ?>
-
-		</div>
-
-		<div class="pagination-links" id="member-pag-top">
-
-			<?php bp_members_pagination_links(); ?>
-
-		</div>
-
-	</div>
-
-	<?php do_action( 'bp_before_group_members_list' ); ?>
-
-	<ul id="members-list" class="item-list" role="main">
-
-		<?php while ( bp_group_members() ) : bp_group_the_member(); ?>
-
-			<li>
-			    <div class="item-avatar">
-                    <a href="<?php bp_group_member_domain(); ?>">
-
-                        <?php bp_group_member_avatar_thumb('type=full&width=70&height=70'); ?>
-
-                    </a>
-			    </div>
-
-				<div class="item">
-                    <div class="item-title"><?php bp_group_member_link(); ?></div>
-                    <div class="item-meta">
-                        <span class="activity"><?php bp_group_member_joined_since(); ?></span>
-                    </div>
-
-				<?php do_action( 'bp_group_members_list_item' ); ?>
-
-                </div>
-                <?php if ( bp_is_active( 'friends' ) ) : ?>
-
-					<div class="action">
-					    <div class="action-wrap">
-
-                            <?php bp_add_friend_button( bp_get_group_member_id(), bp_get_group_member_is_friend() ); ?>
-
-                            <?php do_action( 'bp_group_members_list_item_action' ); ?>
-
+			<div class="flex-container clan-posts">
+				<?php if ( $the_query->have_posts() ) : while ( $the_query->have_posts() ) : $the_query->the_post(); // run the loop ?>
+				    <div class="flex-item">
+					  <article>	
+					  <a href="<?php the_permalink(); ?>">
+					  	<div class="anth-thumb" <?php echo anth_thumb_background();?>>				  						  	
+					  </a>		
+					  	<a href="<?php the_permalink(); ?>">
+					    	<h2><?php echo the_title(); ?></h2>
+					    </a>
+					  </div>  
+					    <div class="anth-fav">
+					    	<?php echo get_simple_likes_button(get_the_id()); ?>	
+					    	<?php echo crunchify_social_sharing_buttons($post);?>	
 					    </div>
-					</div>
+					    <div class="anth-author">
+					    	<?php the_author();?>
+					    </div>
+					    <div class="anth-excerpt">
+					      <?php the_excerpt(); ?>			     
+					    </div>
+					  </article>
+					</div>	  
+				<?php endwhile; ?>
+			</div>	
 
-				<?php endif; ?>
-			</li>
+			<?php if ($the_query->max_num_pages > 1) { // check if the max number of pages is greater than 1  ?>
+			  <nav class="anth-prev-next-posts">
+			    <div class="anth-posts-link">
+			      <?php echo get_next_posts_link( 'More Challenges', $the_query->max_num_pages ); // display older posts link ?>
+			    </div>
+			    <div class="anth-posts-link">
+			      <?php echo get_previous_posts_link( 'Previous challenges' ); // display newer posts link ?>
+			    </div>
+			  </nav>
+			<?php } ?>
 
-		<?php endwhile; ?>
 
-	</ul>
+			<?php else: ?>
+			  <article>
+			    <h1>Sorry...</h1>
+			    <p><?php _e('Sorry, no posts matched your criteria.'); ?></p>
+			  </article>
+			<?php endif; ?>
+			  
 
-	<?php do_action( 'bp_after_group_members_list' ); ?>
 
-	<div id="pag-bottom" class="pagination">
+			<?php wp_link_pages( array( 'before' => '<div class="page-links">' . __( 'Pages:', 'boss' ), 'after' => '</div>' ) ); ?>
+		</div><!-- .entry-content -->
 
-		<div class="pag-count" id="member-count-bottom">
+		<footer class="entry-meta">
+			<?php edit_post_link( __( 'Edit', 'boss' ), '<span class="edit-link">', '</span>' ); ?>
+		</footer><!-- .entry-meta -->
 
-			<?php bp_members_pagination_count(); ?>
-
-		</div>
-
-		<div class="pagination-links" id="member-pag-bottom">
-
-			<?php bp_members_pagination_links(); ?>
-
-		</div>
-
-	</div>
-
-	<?php do_action( 'bp_after_group_members_content' ); ?>
-
-<?php else: ?>
-
-	<div id="message" class="info">
-		<p><?php _e( 'This group has no members.', 'boss' ); ?></p>
-	</div>
-
-<?php endif; ?>
+	</article><!-- #post -->

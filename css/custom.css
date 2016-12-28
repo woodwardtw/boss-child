@@ -246,6 +246,10 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
     margin-right: 7px;
    }
 
+/*CLAN POSTS*/
+
+
+
 /*--------------------------------------------------------------
 2.0 - Responsive media queries (mobile styles)
 --------------------------------------------------------------*/
@@ -308,6 +312,8 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
     margin-right: 12px;
    }
 
+
+
 }/* don't delete this closing bracket */
 
 
@@ -317,7 +323,7 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
 /*--------------------------------------------------------------
 2.2 - MAXIMUM width of 350 pixels (phones portrait)
 --------------------------------------------------------------*/
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 370px) {
 
 
   .flex-container {
@@ -325,7 +331,6 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
   }
 
  .flex-item {
-      height: 400px;
       width: 400px;
       padding: 2px 15px;
       margin-left: -20px;
@@ -346,6 +351,9 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
     margin: 0 auto;
   }
 
+/*CLAN POSTS*/
+
+  
 
 }/* don't delete this closing bracket */
 
@@ -359,7 +367,10 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
 @media screen and (min-width: 721px)  {
 
 
-
+.clan-posts {
+  margin-left: -80px;
+  margin-right: -80px;
+}
 
 }/* don't delete this closing bracket */
 
