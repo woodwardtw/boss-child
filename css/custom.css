@@ -83,6 +83,7 @@ You're the boss, so have fun editing!
 #challenge-block {
   display: inline-block;
   width: 100%;
+  margin-left: 20px;
 }  
 
 
@@ -231,6 +232,7 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
     display: inline-block;
     font-weight: 100; 
     margin-right: 5px;
+    color: #424242;
    }
 
    .anth-social {
@@ -293,6 +295,19 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
     margin: 0 auto;
   }
 
+/* sharing buttons */
+.anth-social {
+  font-size: 2.5em;  
+  }
+
+.anth-share-header{
+  font-size: .5em;
+}  
+
+.anth-link {
+    margin-right: 12px;
+   }
+
 }/* don't delete this closing bracket */
 
 
@@ -330,6 +345,7 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
     height: 360px;
     margin: 0 auto;
   }
+
 
 }/* don't delete this closing bracket */
 

@@ -48,7 +48,8 @@ get_header(); ?>
                             <?php endif; ?>
                         </header><!-- .entry-header -->
                     </div>
-                    <?php echo crunchify_social_sharing_buttons();?>
+                    <?php echo crunchify_social_sharing_buttons(the_post());?>   
+
 
 
                     <div class="entry-content">

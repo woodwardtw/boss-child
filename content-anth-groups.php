@@ -62,7 +62,7 @@
 					  </div>  
 					    <div class="anth-fav">
 					    	<?php echo get_simple_likes_button(get_the_id()); ?>	
-					    	<?php var_dump(crunchify_social_sharing_buttons()); ?>				    	
+					    	<?php echo crunchify_social_sharing_buttons($post);?>	
 					    </div>
 					    <div class="anth-author">
 					    	<?php the_author();?>

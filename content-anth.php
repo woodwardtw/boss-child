@@ -51,7 +51,8 @@
 					      <?php the_excerpt(); ?>			     
 					    </div>
 					    <div class="anth-fav">
-					    	<?php echo get_simple_likes_button(get_the_id()) . sap_get_bookmark_button() ; ?>					    	
+					    	<?php echo get_simple_likes_button(get_the_id()) . sap_get_bookmark_button() ; ?>
+					    	<?php echo crunchify_social_sharing_buttons($post);?>	
 					    </div>
 					  </article>
 					</div>	  

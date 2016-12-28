@@ -191,7 +191,7 @@ function ra_add_author_filter() {
 
 
 //SOCIAL SHARING 
-function crunchify_social_sharing_buttons() {
+function crunchify_social_sharing_buttons($post) {
     global $post;
     // Get current page URL 
     $crunchifyURL = urlencode(get_the_permalink($post));
@@ -208,7 +208,8 @@ function crunchify_social_sharing_buttons() {
     $googleURL = 'https://plus.google.com/share?url='.$crunchifyURL;
     $linkedInURL = 'https://www.linkedin.com/shareArticle?mini=true&url='.$crunchifyURL.'&amp;title='.$crunchifyTitle;
     $pinterestURL = 'https://pinterest.com/pin/create/button/?url='.$crunchifyURL.'&amp;media='.$crunchifyThumbnail[0].'&amp;description='.$crunchifyTitle;
- 
+    
+    $content = '';
     // Add sharing button at the end of page/page content
     $content .= '<!-- Crunchify.com social sharing. Get your copy here: http://crunchify.me/1VIxAsz -->';
     $content .= '<div class="anth-social"><div class="anth-share-header">Share via  </div>';
@@ -219,10 +220,9 @@ function crunchify_social_sharing_buttons() {
     $content .= '<a class="anth-link crunchify-pinterest" href="'.$pinterestURL.'" target="_blank"><i class="fa fa-pinterest"></i></a>';
     $content .= '</div>';
     
-    echo $content;
+    return $content;
  
 };
-//add_filter( 'the_content', 'crunchify_social_sharing_buttons');
 
 
 ?>
