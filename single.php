@@ -38,6 +38,7 @@ get_header(); ?>
                             echo badgeos_achievement_points_markup();
                             ?>
 
+
                             <?php the_title( sprintf( '<h1 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h1>' ); ?>
 
                             <?php if ( 'post' == get_post_type() ) : ?>
@@ -47,8 +48,11 @@ get_header(); ?>
                             <?php endif; ?>
                         </header><!-- .entry-header -->
                     </div>
+                    <?php echo crunchify_social_sharing_buttons();?>
+
 
                     <div class="entry-content">
+                    
                         <?php
                             /* translators: %s: Name of current post */
                             the_content( sprintf(
@@ -56,6 +60,7 @@ get_header(); ?>
                                 the_title( '<span class="screen-reader-text">"', '"</span>', false )
                             ) );
                         ?>
+
 
                         <?php
                             wp_link_pages( array(

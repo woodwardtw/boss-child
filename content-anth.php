@@ -43,14 +43,15 @@
 					    	<h2><?php echo the_title(); ?></h2>
 					    </a>
 					  </div>  
-					    <div class="anth-fav">
-					    	<?php echo get_simple_likes_button(get_the_id()); ?>					    	
-					    </div>
+					    
 					    <div class="anth-author">
 					    	<?php the_author();?>
 					    </div>
 					    <div class="anth-excerpt">
 					      <?php the_excerpt(); ?>			     
+					    </div>
+					    <div class="anth-fav">
+					    	<?php echo get_simple_likes_button(get_the_id()) . sap_get_bookmark_button() ; ?>					    	
 					    </div>
 					  </article>
 					</div>	  

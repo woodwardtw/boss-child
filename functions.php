@@ -148,6 +148,8 @@ function anth_cat_search_add_meta_box() {
     }
 }
 
+
+//doing the background image inline CSS
 function anth_thumb_background(){
     global $post; 
 
@@ -162,6 +164,9 @@ function anth_thumb_background(){
     return 'style="background-color:#efefef"';
     }
   }
+
+
+//Direct author links to BuddyPress profile links  
 function ra_add_author_filter() {
           add_filter( 'author_link', 'ra_bp_filter_author' );
   }       
@@ -183,5 +188,41 @@ function ra_add_author_filter() {
           }
           return $content;
   }
+
+
+//SOCIAL SHARING 
+function crunchify_social_sharing_buttons() {
+    global $post;
+    // Get current page URL 
+    $crunchifyURL = urlencode(get_the_permalink($post));
+ 
+    // Get current page title
+    $crunchifyTitle = str_replace( ' ', '%20', get_the_title($post));
+
+    // Get Post Thumbnail for pinterest
+    $crunchifyThumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID), 'full' );
+
+    // Construct sharing URL without using any script
+    $twitterURL = 'https://twitter.com/intent/tweet?text='.$crunchifyTitle.'&amp;url='.$crunchifyURL;
+    $facebookURL = 'https://www.facebook.com/sharer/sharer.php?u='.$crunchifyURL;
+    $googleURL = 'https://plus.google.com/share?url='.$crunchifyURL;
+    $linkedInURL = 'https://www.linkedin.com/shareArticle?mini=true&url='.$crunchifyURL.'&amp;title='.$crunchifyTitle;
+    $pinterestURL = 'https://pinterest.com/pin/create/button/?url='.$crunchifyURL.'&amp;media='.$crunchifyThumbnail[0].'&amp;description='.$crunchifyTitle;
+ 
+    // Add sharing button at the end of page/page content
+    $content .= '<!-- Crunchify.com social sharing. Get your copy here: http://crunchify.me/1VIxAsz -->';
+    $content .= '<div class="anth-social"><div class="anth-share-header">Share via  </div>';
+    $content .= '<a class="anth-link crunchify-twitter" href="' . $twitterURL .'" target="_blank"><i class="fa fa-twitter"></i></a>';
+    $content .= '<a class="anth-link crunchify-facebook" href="'. $facebookURL .'" target="_blank"><i class="fa fa-facebook-official"></i></a>';
+    $content .= '<a class="anth-link crunchify-googleplus" href="'.$googleURL.'" target="_blank"><i class="fa fa-google"></i></a>';
+    $content .= '<a class="anth-link crunchify-linkedin" href="'.$linkedInURL.'" target="_blank"><i class="fa fa-linkedin"></i></a>';
+    $content .= '<a class="anth-link crunchify-pinterest" href="'.$pinterestURL.'" target="_blank"><i class="fa fa-pinterest"></i></a>';
+    $content .= '</div>';
+    
+    echo $content;
+ 
+};
+//add_filter( 'the_content', 'crunchify_social_sharing_buttons');
+
 
 ?>
