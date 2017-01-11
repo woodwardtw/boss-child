@@ -151,6 +151,7 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
       display: -webkit-flex; /* This is the Chrome notation */  
       min-height: 260px;
       flex-flow: row wrap;
+      float: left;
     }
 
   .flex-item {
@@ -232,21 +233,33 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
 
    /*SOCIAL SHARE LINKS*/
    .anth-share-header{
-    display: inline-block;
+    display: block;
     font-weight: 100; 
-    margin-right: 5px;
+    margin: 5px auto;
     color: #424242;
+    width: 80%;
+    padding: 5px 7px;
+    border: 1px solid #efefef;
+    text-align: center;
+    font-size: 2em;
+   }
+
+   .anth-share-header:hover {
+    background-color: #efefef;
    }
 
    .anth-social {
-    display: inline-block;
-    padding: 3px;
+    display: none;
+    padding: 5px 7px;
     border: 1px solid #efefef;
-    margin-right: 5px;
+    margin: 5px auto;
+    width: 80%;
+    font-size: 1.5em;
+    text-align: center;
    }
 
    .anth-link {
-    margin-right: 7px;
+    margin-right: 9px;
    }
 
 /*CLAN POSTS*/
@@ -308,7 +321,7 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
   }
 
 .anth-share-header{
-  font-size: .5em;
+  font-size: 2.5em;
 }  
 
 .anth-link {
@@ -341,9 +354,9 @@ body.page-template-front-page.page:not(.buddypress) .site-content article:not(.c
   }
 
  .flex-item {
-      width: 400px;
+      width: 370px;
       padding: 2px 15px;
-      margin-left: -20px;
+      margin-left: -35px;
     }   
 
   .anth-excerpt {

@@ -38,19 +38,20 @@
 			<?php endif; ?>
 			<div class="flex-item-archive">
 			<div class="post-wrap">
-
+		
 			<header>
 				<h1 class="entry-title">
 					<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'boss' ), the_title_attribute( 'echo=0' ) ) ); ?>" rel="bookmark"><?php the_title(); ?></a>
 				</h1>
+				
 			</header><!-- .entry-header -->
 			<?php echo  get_simple_likes_button($the_id) . sap_get_bookmark_button();?>
 			<div class="entry-meta mobile">
-				<?php buddyboss_entry_meta( false ); ?>
+				<?php buddyboss_entry_meta( false ); ?>				 
 			</div>
 
 			<div class="entry-content entry-summary <?php if ( has_post_thumbnail() ) : ?>entry-summary-thumbnail<?php endif; ?>">
-
+	
 				<?php
 						//entry-content
 						if ( 'excerpt' === boss_get_option( 'boss_entry_content' ) ):

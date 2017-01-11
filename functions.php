@@ -49,8 +49,11 @@ function boss_child_theme_scripts_styles()
    * Styles
    */
   wp_enqueue_style( 'boss-child-custom', get_stylesheet_directory_uri().'/css/custom.css' );
+  wp_enqueue_script( 'boss-child-social', get_stylesheet_directory_uri().'/js/social.js');
 }
 add_action( 'wp_enqueue_scripts', 'boss_child_theme_scripts_styles', 9999 );
+
+
 function wpdocs_custom_excerpt_length( $length ) {
     return 20;
 }
@@ -211,8 +214,8 @@ function crunchify_social_sharing_buttons($post) {
     
     $content = '';
     // Add sharing button at the end of page/page content
-    $content .= '<!-- Crunchify.com social sharing. Get your copy here: http://crunchify.me/1VIxAsz -->';
-    $content .= '<div class="anth-social"><div class="anth-share-header">Share via  </div>';
+    $content .= '<div class="anth-share-header"  onClick="toggle_visibility(\'anth-social-'.$post->ID.'\')">Share <i class="fa fa-paper-plane"></i></div>';
+    $content .= '<div class="anth-social anth-social-'. $post->ID .'">';
     $content .= '<a class="anth-link crunchify-twitter" href="' . $twitterURL .'" target="_blank"><i class="fa fa-twitter"></i></a>';
     $content .= '<a class="anth-link crunchify-facebook" href="'. $facebookURL .'" target="_blank"><i class="fa fa-facebook-official"></i></a>';
     $content .= '<a class="anth-link crunchify-googleplus" href="'.$googleURL.'" target="_blank"><i class="fa fa-google"></i></a>';

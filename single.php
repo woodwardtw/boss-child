@@ -37,18 +37,18 @@ get_header(); ?>
                             // Points for badge
                             echo badgeos_achievement_points_markup();
                             ?>
-
-
+                            
                             <?php the_title( sprintf( '<h1 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h1>' ); ?>
-
+                            
+                            
                             <?php if ( 'post' == get_post_type() ) : ?>
                             <div class="entry-meta">
                                 <?php underscores_posted_on(); ?>
                             </div><!-- .entry-meta -->
                             <?php endif; ?>
                         </header><!-- .entry-header -->
+
                     </div>
-                    <?php echo crunchify_social_sharing_buttons(the_post());?>   
 
 
 
@@ -189,6 +189,7 @@ get_header(); ?>
                 </div>
 
                 <?php get_template_part( 'content', get_post_format() ); ?>
+                <?php echo crunchify_social_sharing_buttons($id);?>  
 
                 <?php comments_template( '', true ); ?>
 
