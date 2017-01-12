@@ -23,6 +23,12 @@ You're the boss, so have fun editing!
 1.0 - Global Styles
 --------------------------------------------------------------*/
  @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+.home-page .entry-content, .home-page .entry-content p {
+  max-width: 100%;
+}
+
+
 .entry-content, .entry-content p {
   font-family: 'Lato', sans-serif;
   font-size: 18px;
@@ -34,6 +40,8 @@ You're the boss, so have fun editing!
   max-width: 800px;
   margin: 0 auto;
 }
+
+
 
 
 #challenge-block .square {
