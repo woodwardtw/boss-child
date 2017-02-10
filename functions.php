@@ -214,18 +214,21 @@ function crunchify_social_sharing_buttons($post) {
     
     $content = '';
     // Add sharing button at the end of page/page content
-    $content .= '<div class="anth-share-header"  onClick="toggle_visibility(\'anth-social-'.$post->ID.'\')">Share <i class="fa fa-paper-plane"></i></div>';
+    $content .= '<div class="anth-extras"><div class="anth-share-header">';
+    $content .=  get_simple_likes_button(get_the_id());
+    $content .= '<i class="fa fa-paper-plane" onClick="toggle_visibility(\'anth-social-'.$post->ID.'\')"></i></div>';
     $content .= '<div class="anth-social anth-social-'. $post->ID .'">';
     $content .= '<a class="anth-link crunchify-twitter" href="' . $twitterURL .'" target="_blank"><i class="fa fa-twitter"></i></a>';
     $content .= '<a class="anth-link crunchify-facebook" href="'. $facebookURL .'" target="_blank"><i class="fa fa-facebook-official"></i></a>';
     $content .= '<a class="anth-link crunchify-googleplus" href="'.$googleURL.'" target="_blank"><i class="fa fa-google"></i></a>';
     $content .= '<a class="anth-link crunchify-linkedin" href="'.$linkedInURL.'" target="_blank"><i class="fa fa-linkedin"></i></a>';
     $content .= '<a class="anth-link crunchify-pinterest" href="'.$pinterestURL.'" target="_blank"><i class="fa fa-pinterest"></i></a>';
-    $content .= '</div>';
+    $content .= '</div></div>';
     
     return $content;
  
 };
+
 
 //BUDDYPRESS GROUPS MODIFICATIONS
 /**
@@ -285,5 +288,99 @@ class Group_Extension_Anth extends BP_Group_Extension {
 bp_register_group_extension( 'group_extension_anth' );
  
 endif; // if ( bp_is_active( 'groups' ) )
+
+
+//change default page for groups/clans
+function bbg_set_group_default_extension( $ext ) {
+  return 'group-anth-posts';
+  }
+  
+add_filter( 'bp_groups_default_extension', 'bbg_set_group_default_extension');
+
+
+/**
+*BUDDYPRESS PROFILE PAGE CLEANSING
+*/
+function anth_bp_clean_menu() {
+global $bp;
+bp_core_remove_nav_item( 'groups' );
+bp_core_remove_nav_item( 'invite_anyone' );
+
+}
+add_action( 'bp_setup_nav', 'anth_bp_clean_menu', 15 );
+
+
+
+
+function bpfr_profile_menu_tab_pos(){
+global $bp;
+$bp->bp_nav['profile']['position'] = 10;
+$bp->bp_nav['blogs']['position'] = 20;
+$bp->bp_nav['forums']['position'] = 30;
+$bp->bp_nav['activity']['position'] = 40;
+$bp->bp_nav['notifications']['position'] = 50;
+$bp->bp_nav['friends']['position'] = 60;
+$bp->bp_nav['groups']['position'] = 70;
+}
+add_action('bp_setup_nav', 'bpfr_profile_menu_tab_pos', 100);
+
+/**
+* visual composer shortcode add on
+*/
+
+add_filter( 'vc_grid_item_shortcodes', 'my_module_add_grid_shortcodes' );
+function my_module_add_grid_shortcodes( $shortcodes ) {
+   $shortcodes['vc_social_sharing'] = array(
+     'name' => __( 'Social Sharing', 'my-text-domain' ),
+     'base' => 'vc_social_sharing',
+     'category' => __( 'Content', 'my-text-domain' ),
+     'description' => __( 'Show social sharing options', 'my-text-domain' ),
+     'post_type' => Vc_Grid_Item_Editor::postType(),
+  );
+ 
+ 
+   return $shortcodes;
+}
+ 
+
+// output function
+add_shortcode( 'vc_social_sharing', 'vc_social_sharing_render' );
+function vc_social_sharing_render($value, $data) {
+
+    $post_id = '{{ post_data:ID }}';
+    $crunchifyURL = '{{ post_data:guid }}';
+    $post_title ='{{ post_data:post_title }}';
+    // Get current page title     
+    $crunchifyTitle = str_replace( ' ', '%20', $post_title);
+
+    // Get Post Thumbnail for pinterest
+    $crunchifyThumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id), 'full' );
+
+    // Construct sharing URL without using any script
+    $twitterURL = 'https://twitter.com/intent/tweet?text='.$post_title.'&amp;url='.$crunchifyURL;
+    $facebookURL = 'https://www.facebook.com/sharer/sharer.php?u='.$crunchifyURL;
+    $googleURL = 'https://plus.google.com/share?url='.$crunchifyURL;
+    $linkedInURL = 'https://www.linkedin.com/shareArticle?mini=true&url='.$crunchifyURL.'&amp;title='.$post_title;
+    $pinterestURL = 'https://pinterest.com/pin/create/button/?url='.$crunchifyURL.'&amp;media='.$crunchifyThumbnail[0].'&amp;description='.$post_title;
+    
+    $content = '';
+    // Add sharing button at the end of page/page content
+    $content .= '<div class="anth-extras"><div class="anth-share-header">';
+    $content .= get_simple_likes_button($post_id);
+    $content .= '<i class="fa fa-paper-plane" onClick="toggle_visibility(\'anth-social-'.$post_id.'\')"></i></div>'; //<a href="'.$crunchifyURL.'"><i class="fa fa-plus"></i></a>
+    $content .= '<div class="anth-social anth-social-'. $post_id .'">';
+    $content .= '<a class="anth-link crunchify-twitter" href="' . $twitterURL .'" target="_blank"><i class="fa fa-twitter"></i></a>';
+    $content .= '<a class="anth-link crunchify-facebook" href="'. $facebookURL .'" target="_blank"><i class="fa fa-facebook-official"></i></a>';
+    $content .= '<a class="anth-link crunchify-googleplus" href="'.$googleURL.'" target="_blank"><i class="fa fa-google"></i></a>';
+    $content .= '<a class="anth-link crunchify-linkedin" href="'.$linkedInURL.'" target="_blank"><i class="fa fa-linkedin"></i></a>';
+    $content .= '<a class="anth-link crunchify-pinterest" href="'.$pinterestURL.'" target="_blank"><i class="fa fa-pinterest"></i></a>';
+    $content .= '</div></div>';
+    
+    return $content;
+ 
+
+   
+   return visual_social_sharing_buttons($post_id); // usage of template variable post_data with argument "ID"
+}
 
 ?>
